@@ -2,14 +2,14 @@ from dataclasses import dataclass
 
 def loadDocs():
     try:
-        import RTS_Documentations
+        import RTS_DocsBuilder
     except ImportError:
         print("Could not load Documentations, due to missing module.")
 
 
     
     try:
-        from RTS_Documentations.RInitiate import RInitiate
+        from RTS_DocsBuilder.RInitiate import RInitiate
         initDocs = RInitiate()
         docMemory.initDocs = initDocs
         #print("starting documentation initiator...")
