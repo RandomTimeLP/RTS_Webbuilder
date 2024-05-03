@@ -1,6 +1,7 @@
 from aiohttp import web
 import os
 import asyncio, threading, time
+from threading import Thread
 
 
 
@@ -18,7 +19,7 @@ class RWebserver:
         self.site = None
         self._srcFolders:set = set()
 
-    async def start(self) -> None:
+    async def __start(self) -> None:
         from .cache import rtswuib_cache
         if not rtswuib_cache.MAIN_WEBSERVER is None:
             raise ValueError('It is best practice to only have one webserver running at a time. Please stop the current webserver before starting a new one.')
@@ -60,12 +61,20 @@ class RWebserver:
     def init_routes(self):
         self.app.router.add_route('GET', '/src/{path:.*}', self.serve_file)
 
+    def __proceed(self,launch, *args, **kwargs):
+        time.sleep(2)
+        print(*args, **kwargs)
+        if launch:
+            launch(*args, **kwargs)
 
-    def run(self) -> None:
+
+    def run(self, proceedWithFunction, *args, **kwargs) -> None:
+        Thread(target=self.__proceed, args=(proceedWithFunction, *args), kwargs=kwargs).start()
+
         self.init_routes()
         self.automountGet()
         
-        self.loop.run_until_complete(self.start())
+        self.loop.run_until_complete(self.__start())
         try:
             self.loop.run_forever()
         except KeyboardInterrupt:
