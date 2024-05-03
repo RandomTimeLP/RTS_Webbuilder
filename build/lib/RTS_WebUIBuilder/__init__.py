@@ -12,6 +12,7 @@ from .RFrame import RFrame
 from .RWebserver import RWebserver
 from .RTitle import RTitle
 from .RGroupStyle import RGroupStyle
+from .RQuickScripts import RQuickScripts
 from .privatizehead import private
 from .exeptional import *
 
