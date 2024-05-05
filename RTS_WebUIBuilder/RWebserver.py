@@ -63,7 +63,6 @@ class RWebserver:
 
     def __proceed(self,launch, *args, **kwargs):
         time.sleep(2)
-        print(*args, **kwargs)
         if launch:
             launch(*args, **kwargs)
 

@@ -11,5 +11,5 @@ def main(webs):
     dom.body.title.displaytext = "Kill me already!"
     dom.asm()
 
-webs.run(main, webs)
+webs.run(main, webs=webs)
 
