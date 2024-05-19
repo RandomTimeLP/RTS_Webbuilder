@@ -1,5 +1,5 @@
 from .cache import rtswuib_cache 
-
+from .presets import *
 from .RAdditions import rgba, rgb
 from .RDocument import RDocument, RHTML
 from .RHead import RHeader
