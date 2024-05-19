@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='RTS-WebUIBuilder',
-    version='0.8',
+    version='0.9',
     packages=find_packages(),
     description='A simple webserver with a simple webui builder.',
     long_description=open('README.md').read(),
