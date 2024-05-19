@@ -10,6 +10,7 @@ class RWebserver:
         from .cache import rtswuib_cache
         if not rtswuib_cache.MAIN_WEBSERVER is None:
             raise ValueError('It is best practice to only have one webserver running at a time. Please stop the current webserver before starting a new one.')
+        rtswuib_cache.MAIN_WEBSERVER = self
         self.host:str = host
         self.port:int = port
         self.bannedRoutes:set = set()
@@ -21,10 +22,6 @@ class RWebserver:
 
     async def __start(self) -> None:
         from .cache import rtswuib_cache
-        if not rtswuib_cache.MAIN_WEBSERVER is None:
-            raise ValueError('It is best practice to only have one webserver running at a time. Please stop the current webserver before starting a new one.')
-        rtswuib_cache.MAIN_WEBSERVER = self
-       
         
         await self.runner.setup()
         self.site = web.TCPSite(self.runner, self.host, self.port)
@@ -88,7 +85,7 @@ class RWebserver:
         else:
             raise ValueError("routes must be a list or a string.")
 
-    def add_route(self,*, method:str='GET', path:str, handler:any) -> None:
+    def add(self,*, method:str='GET', path:str, handler:any) -> None:
         self.bannedRoutes.add(path)
         if method.upper() == 'GET':
             self.app.router.add_get(path, handler)
