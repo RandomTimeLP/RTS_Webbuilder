@@ -75,6 +75,23 @@ class RWebserver:
             self.loop.run_forever()
         except KeyboardInterrupt:
             self.loop.run_until_complete(self.stop())
+            
+    def __async_proceed(self, launch,loop, *args, **kwargs):
+        time.sleep(2)
+        if launch:
+            asyncio.run_coroutine_threadsafe(launch(*args, **kwargs), loop)
+
+    def async_run(self, proceedWithFunction, *args, **kwargs) -> None:
+        Thread(target=self.__async_proceed, args=(proceedWithFunction,self.loop, *args), kwargs=kwargs).start()
+
+        self.init_routes()
+        self.automountGet()
+        
+        self.loop.run_until_complete(self.__start())
+        try:
+            self.loop.run_forever()
+        except KeyboardInterrupt:
+            self.loop.run_until_complete(self.stop())
 
     def bannDynamicroutesFromAutomount(self, routes:any) -> None:
         if isinstance(routes, list):

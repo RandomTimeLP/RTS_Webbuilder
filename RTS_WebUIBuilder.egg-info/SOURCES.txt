@@ -25,5 +25,7 @@ RTS_WebUIBuilder.egg-info/SOURCES.txt
 RTS_WebUIBuilder.egg-info/dependency_links.txt
 RTS_WebUIBuilder.egg-info/requires.txt
 RTS_WebUIBuilder.egg-info/top_level.txt
+RTS_WebUIBuilder/docs/__init__.py
+RTS_WebUIBuilder/docs/load.py
 RTS_WebUIBuilder/presets/Button1.py
 RTS_WebUIBuilder/presets/__init__.py
